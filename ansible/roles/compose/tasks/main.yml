@@ -14,7 +14,7 @@
 
 - name: Ensure project dir is up to date
   git:
-    src: https://github.com/f0rkz/nickthegray.git
+    repo: https://github.com/f0rkz/nickthegray.git
     dest: "{{ project_dir }}"
     update: true
 
