@@ -12,6 +12,12 @@
     mode: "0755"
     state: directory
 
+- name: Ensure project dir is up to date
+  git:
+    src: https://github.com/f0rkz/nickthegray.git
+    dest: "{{ project_dir }}"
+    update: true
+
 - name: Deploy docker-compose
   template:
     src: docker-compose.yml.j2
