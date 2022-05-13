@@ -41,3 +41,15 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+  deploy:
+    if: ${{ success() }}
+    runs-on: self-hosted
+    needs: build-and-push-image
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install ansible
+        run: pip install ansible
+      - name: Run the playbook
+        run: |
+          cd ansible;
+          ansible-playbook --connection=local --inventory 127.0.0.1, main.yml

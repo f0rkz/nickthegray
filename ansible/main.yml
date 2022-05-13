@@ -1,0 +1,33 @@
+---
+
+- name: Deploy nickthegray.com
+  hosts: localhost
+  become: true
+  gather_facts: true
+  become_method: sudo
+  roles:
+    - compose
+  vars:
+    project_dir: /opt/nickthegray
+    compose:
+      version: '3.7'
+      services:
+        nickthegray:
+          image: ghcr.io/f0rkz/nickthegray:latest
+          restart: always
+          ports:
+            - 3000
+          networks:
+            - traefik_proxy
+          volumes:
+            - "{{ project_dir }}/config.json:/app/config.json"
+          labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.ntg.rule=HostRegexp(`{host:(www.)?nickthegray.com}`)"
+            - "traefik.http.routers.ntg.entrypoints=websecure"
+            - "traefik.http.routers.ntg.tls.certresolver=myresolver"
+            - "traefik.docker.network=traefik_proxy"
+      networks:
+        traefik_proxy:
+          external:
+            name: traefik_proxy
