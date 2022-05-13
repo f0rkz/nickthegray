@@ -1,20 +1,19 @@
 {
     "readmeUrl": "https://raw.githubusercontent.com/f0rkz/nickthegray/main/about.md",
-    "title": "LiveTerm",
-    "name": "John Doe",
-    "ascii": "liveterm",
+    "title": "Nick the Gray",
+    "name": "Nick Gray",
+    "ascii": "f0rkznet",
     "social": {
-      "github": "github",
-      "linkedin": "linkedin"
+      "github": "f0rkz",
+      "linkedin": "nicholas-gray-54226b47"
     },
-    "email": "contact@email.com",
-    "ps1_hostname": "liveterm",
-    "ps1_username": "visitor",
-    "repo": "https://github.com/Cveinnt/LiveTerm",
-    "resume_url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Resume.pdf",
+    "email": "nick@nickthegray.com",
+    "ps1_hostname": "srv04.f0rkznet.net",
+    "ps1_username": "user",
+    "repo": "https://github.com/f0rkz/nickthegray",
+    "resume_url": "https://raw.githubusercontent.com/f0rkz/nickthegray/main/about.md",
     "donate_urls": {
-      "paypal": "https://paypal.me/cveinnt",
-      "patreon": "https://patreon.com/cveinnt"
+      "paypal": "https://paypal.me/f0rkz"
     },
     "colors": {
       "light": {

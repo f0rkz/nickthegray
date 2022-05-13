@@ -14,5 +14,6 @@ RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com
 RUN apt update -yq && apt install -y yarn
 RUN mkdir -p /app
 WORKDIR /app
-RUN git clone https://github.com/Cveinnt/LiveTerm.git /app
+RUN git clone https://github.com/f0rkz/LiveTerm.git /app
 RUN yarn install
+ENTRYPOINT [ "yarn", "dev" ]
