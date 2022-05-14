@@ -7,7 +7,8 @@ I was browsing [reddit.com/r/unixporn](https://reddit.com/r/unixporn) yesterday 
 
 Here's what the Dockerfile looks like:
 
-```Dockerfile
+<pre>
+<code>
 FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update -yq && apt install -y --no-install-recommends \
@@ -27,19 +28,21 @@ WORKDIR /app
 RUN git clone https://github.com/f0rkz/LiveTerm.git /app
 RUN yarn install
 ENTRYPOINT [ "yarn", "dev" ]
-```
+</code>
+</pre>
 
 Essentially, it installs node.js, clones a fork of the LiveTerm application that I modified and installs package dependencies. Of course, I wasn't done there. Next I was tinkering with actions to wire in [GitHub Packages](https://docs.github.com/en/packages) to service this docker container to my DMZ server. After a small amount of [GitHub Actions](https://github.com/features/actions), I was able to build the container and push it to the [GitHub Packages](https://docs.github.com/en/packages). But it was not enough... This was a showcase of me, after all. Let's deploy the website with CI/CD.
 
 To the whiteboard (this one will be easy)!
 
-<p align="center"><img src="https://static.nickthegray.com/img/2022-05-13_113753.png" alt="Whiteboard to the Rescue" />
+<p align="center"><img src="https://static.nickthegray.com/img/2022-05-13_113753.png" alt="Whiteboard to the Rescue" /></p>
 
 The concept should be easy. Using ansible and github actions self-hosted runners, we can run the workflows on the DMZ webserver and not have to deal with much credential exchange. I then deployed a docker container using the compose role I've used on several projects.
 
 All the moving parts are here now! Let's complete the project.
 
-```yaml
+<pre>
+<code>
 name: Create, publish, and deploy nickthegray.com
 
 on:
@@ -95,7 +98,8 @@ jobs:
         run: |
           cd ansible;
           ansible-playbook --connection=local --inventory 127.0.0.1, main.yml
-```
+</pre>
+</code>
 
 To put it simply: On tag creation with a v* name, build the docker container image and push it to GitHub Packages. On the success of the previous workflow (we don't want to deploy every time if the build fails) run the ansible-playbook main.yml on localhost. If you notice, the `runs-on` argument is set to `self-hosted`. This is a configured self-hosted runner specifically for this repo pointing to the DMZ webserver.
 
