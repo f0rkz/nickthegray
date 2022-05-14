@@ -33,7 +33,7 @@ Essentially, it installs node.js, clones a fork of the LiveTerm application that
 
 To the whiteboard (this one will be easy)!
 
-![White board to the rescue](img/2022-05-13_113753.png)
+<p align="center"><img src="https://static.nickthegray.com/img/2022-05-13_113753.png" alt="Whiteboard to the Rescue" />
 
 The concept should be easy. Using ansible and github actions self-hosted runners, we can run the workflows on the DMZ webserver and not have to deal with much credential exchange. I then deployed a docker container using the compose role I've used on several projects.
 
